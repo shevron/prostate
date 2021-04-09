@@ -27,20 +27,21 @@ from .http import HTTPClient
 
 
 class GuiController:
-    """GUI Controller
-    """
+    """GUI Controller"""
 
     def __init__(self, glade_file: str, http_client: HTTPClient):
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
-        self.main_window: Gtk.ApplicationWindow = self.builder.get_object('app-window')
-        self.response_buffer: Gtk.TextBuffer = self.builder.get_object('response-buffer')
+        self.main_window: Gtk.ApplicationWindow = self.builder.get_object("app-window")
+        self.response_buffer: Gtk.TextBuffer = self.builder.get_object(
+            "response-buffer"
+        )
         self.builder.connect_signals(self)
 
         self.http_client = http_client
 
     def _get_selected_method(self):
-        combo = self.builder.get_object('req-input-method')
+        combo = self.builder.get_object("req-input-method")
         tree_iter = combo.get_active_iter()
         if tree_iter is not None:
             model = combo.get_model()
@@ -55,13 +56,13 @@ class GuiController:
         for k, v in response.headers.items():
             resp_text += f"{k}: {v}\n"
         resp_text += "\n"
-        resp_text += response.content.decode('utf8')
+        resp_text += response.content.decode("utf8")
 
         self.response_buffer.set_text(resp_text)
 
     def on_request_send(self, _):
         method = self._get_selected_method()
-        url = self.builder.get_object('req-input-url').get_text().strip()
+        url = self.builder.get_object("req-input-url").get_text().strip()
         response = self.http_client.send(method=method, url=url)
         self._display_response(response)
 
@@ -71,11 +72,13 @@ class GuiController:
 
 
 def main():
-    gui_file = pkg_resources.resource_filename(__package__, path.join('ui', 'prostate.glade'))
+    gui_file = pkg_resources.resource_filename(
+        __package__, path.join("ui", "prostate.glade")
+    )
     controller = GuiController(gui_file, HTTPClient())
     controller.main_window.show_all()
     Gtk.main()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

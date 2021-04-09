@@ -1,1 +1,2 @@
-PyGObject-stubs==0.*
+PyGObject-stubs ==0.*
+black ==20.8b1

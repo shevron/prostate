@@ -22,7 +22,6 @@ import requests
 
 
 class HTTPClient:
-
     def __init__(self):
         self.sess = requests.Session()
 
