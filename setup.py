@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md')) as f:
 setup(
     name='prostate',
     url='https://github.com/shevron/prostate',
-    description='Prostate - HTTP Testing Tool',
+    description='Prostate - Testing-oriented Graphical HTTP Client',
     author='Shahar Evron',
     author_email='shahar.evron@gmail.com',
     install_requires=[
@@ -20,7 +20,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        prostate=prostate:main
+        prostate=prostate.main:main
     ''',
     packages=find_packages('prostate'),
     version=p.__version__,

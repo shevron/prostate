@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 # ----------------------------------------------------------------------------
-# Prostate - HTTP Testing Tool
+# Prostate - Testing-oriented Graphical HTTP Client
 # Copyright (C) 2021 Shahar Evron
 #
 # This program is free software: you can redistribute it and/or modify
