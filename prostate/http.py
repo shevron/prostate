@@ -19,13 +19,26 @@
 """HTTP client and utils for Prostate
 """
 import requests
+from urllib.parse import urlparse
+
+from typing import Dict, Optional
 
 
 class HTTPClient:
     def __init__(self):
         self.sess = requests.Session()
 
-    def send(self, method: str, url: str):
+    def send(self, method: str, url: str, cookies: Optional[Dict[str, str]] = None):
         req = requests.Request(method=method, url=url)
+        req.cookies = cookies
         resp = self.sess.send(req.prepare())
         return resp
+
+    @staticmethod
+    def is_valid_url(url: str) -> bool:
+        if not url:
+            return False
+        parsed = urlparse(url)
+        if parsed.scheme in {"http", "https"} and parsed.netloc:
+            return True
+        return False
